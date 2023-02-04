@@ -1,0 +1,58 @@
+<html>
+    <head>
+<style>
+div {
+  width: 400px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <center><title>Delete a Review</title>
+    </head>
+<body>
+    <center><h1>Delete a Review</h1>
+    {% if step == "display_users" %}
+        {% if users|length > 0 %}
+            Select your Account:<p>
+            <form action="{{ url_for('delete_review') }}" method="post">
+            <select name="userid" id="userid">
+                {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="display_reviews">
+            <center><input type="submit"></div></center>
+            </form>
+        {% else %}
+            There are no users.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    {% elif step == "display_reviews" %}
+        {% if reviews|length > 0 %}
+        Select the review you'd like to delete:<p>
+            <form action="{{ url_for('delete_review') }}" method="post">
+            <select name="dishid" id="dishid">
+                {% for review in reviews %}
+                    <option value="{{ review.dishid }}">{{ review.title }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="update_database">
+            <input type="hidden" name="userid" value="{{ userid }}">
+            <center><input type="submit"></div></center>
+            </form> 
+        {% else %}
+            This user has not written any reviews.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    {% elif step == "update_database" %}
+        Thanks for making your changes!
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+    </body>
+</html>

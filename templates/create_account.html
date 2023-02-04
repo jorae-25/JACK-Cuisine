@@ -1,0 +1,32 @@
+<html>
+    <head>
+<style>
+div {
+  width: 200px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Create an Account</title>
+    </head>
+<body>
+    <center><h1>Create an Account</h1>
+    {% if step=="create_new_user" %}
+        <form action="{{ url_for('create_account') }}" method="post">
+            <div>
+                <p>
+        Email Address: <input type="text" size="30" name="email"> <p>
+        First Name:   <input type="text" size="30" name="firstname"> <p>
+        Last Name:   <input type="text" size="30" name="lastname"><p>
+        <input type="hidden" name="step" value="add_user">
+        <center><input type="submit"></center></div>
+        </form>
+    {% elif step == "add_user" %}
+        Your account has been created.
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+            </center>
+    </body>
+</html>

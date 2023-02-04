@@ -1,0 +1,52 @@
+<html>
+    <head>
+<style>
+div {
+  width: 200px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Edit Account</title>
+    </head>
+<body>
+    <center><h1>Edit Account Information</h1>
+    {% if step == "display_users" %}
+        {% if users|length > 0 %}
+            Select your account:<p>
+            <form action="{{ url_for('edit_account') }}" method="post">
+            <select name="userid" id="userid">
+                {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="make_edits">
+            <input type="submit"></div>
+            </form>
+        {% else %}
+            There are no users.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    
+    {% elif step == "make_edits" %}
+        <h3>Edit your account information:</h3>
+        <form action="{{ url_for('edit_account') }}" method="post"><div>
+        First Name: <input type="text" size="30" name="firstname" value="{{user.firstname}}"><p>
+        Last Name: <input type="text" size="30" name="lastname" value="{{user.lastname}}"><p>
+        Email Address: <input type="text" size="30" name="email" value="{{user.email}}"><p>
+        <input type="hidden" name="step" value="update_database">
+        <input type="hidden" name="userid" value="{{ user.userid }}">
+        <center><input type="submit"></center></div>
+        </form>
+        
+    {% elif step == "update_database" %}
+        Thanks for making your changes!
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+    </body>
+</html>

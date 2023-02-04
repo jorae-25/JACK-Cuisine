@@ -1,0 +1,57 @@
+<html>
+    <head>
+<style>
+div {
+  width: 300px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Write a Review</title>
+    </head>
+<body>
+    <center><h1>Write a Review</h1>
+    {% if step =="compose_review" %}
+        <form action="{{ url_for('write_review') }}" method="post">
+        <center><div>
+        Select your account: <br>
+        <select name="userid" id="userid">
+        {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+        {% endfor %}
+        </select>
+            <p>
+        Select the dish you want to review: <br>
+        <select name="dishid" id="dishid">
+        {% for dish in dishes %}
+                    <option value="{{ dish.dishid }}">{{ dish.title }}</option>
+        {% endfor %}
+        </select>
+        <p>
+        Star Rating: <br>
+        <select name="numstars" id="numstars">
+            <option value=1>1 &#11088</option>
+            <option value=2>2 &#11088</option>
+            <option value=3>3 &#11088</option>
+            <option value=4>4 &#11088</option>
+            <option value=5>5 &#11088</option>
+        </select> 
+        <p>
+        Review: <br>
+            <textarea name="reviewtext" rows="5" cols="40"></textarea><br>
+        <input type="hidden" name="step" value="add_review">
+        <center><input type="submit"></center> 
+        </div></center>
+        </form>
+    {% elif step == "add_review" %}
+        Your review has been submitted.
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    
+        
+    </center>
+    </body>
+</html>

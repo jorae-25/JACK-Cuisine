@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Unfavorite a Recipe</title>
+    </head>
+<body>
+    <center><h1>Unfavorite a Recipe</h1>
+    {% if step == "display_users" %}
+        {% if users|length > 0 %}
+            <div>Select your Account:<p>
+            <form action="{{ url_for('unfav_recipe') }}" method="post">
+            <select name="userid" id="userid">
+                {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="display_favorites">
+            <center><input type="submit"></center></div>
+            </form>
+        {% else %}
+            There are no users.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    {% elif step == "display_favorites" %}
+        {% if favorites|length > 0 %}
+        <div>Select the recipe you'd like to unfavorite:<p>
+            <form action="{{ url_for('unfav_recipe') }}" method="post">
+            <select name="dishid" id="dishid">
+                {% for favorite in favorites %}
+                    <option value="{{ favorite.dishid }}">{{ favorite.title }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="update_database">
+            <input type="hidden" name="userid" value="{{ userid }}">
+            <center><input type="submit"></div></center>
+            </form> 
+        {% else %}
+            This user has not favorited any recipes.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    {% elif step == "update_database" %}
+        Thanks for making your changes!
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+    </body>
+</html>

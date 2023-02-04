@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <style>
+  .button {
+  border: true;
+  color: black;
+  width: 200px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #FFFFFF;} /* White */
+
+div {
+  width: 750px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Edit a Recipe</title>
+    </head>
+<body>
+    <center><h1>Edit a Recipe</h1>
+    {% if step == "display_recipes" %}
+        <h3>Select a recipe that you would like to edit.</h3>
+        {% if recipes|length > 0 %}
+            <form action="{{ url_for('edit_recipe') }}" method="post">
+            {% for recipe in recipes %}
+                    <button type="submit" value="{{ recipe.dishid }}" name="dishid" class="button button1">{{ recipe.title }}</button>
+            {% endfor %}
+            <input type="hidden" name="step" value="make_edits">
+            </form>
+        {% else %}
+            There are no recipes.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    
+    {% elif step == "make_edits" %}
+         <h3>Edit this recipe:</h3>
+        <form action="{{ url_for('edit_recipe') }}" method="post"><div>
+        <b>Title:</b><br> <input type="text" size="30" name="title" value="{{recipe.title}}"><p>
+        <b>Time: </b><br><input type="text" size="30" name="time_amt" value="{{recipe.time_amt}}"><p>
+        <b>Directions:</b><br> <textarea name="directions" rows="10" cols="100">{{ recipe.directions }}</textarea><p>
+        <table style="width:60%">
+            <tr style="vertical-align:top">
+            <td><b>Ingredients: </b><br>
+                {% for ingredient in ingredients %}
+                    <input type="text" size="30" name="{{ingredient[0]}}" value="{{ingredient[0]}}"><br>
+                {% endfor %}</td>
+            <td><b>Tools: </b><br>
+                {% for tool in tools %}
+                <select name="{{tool[0]}}" id="{{tool[0]}}">
+                    {% for alltool in alltools %}
+                        {% if alltool[0] == tool[0] %}
+                            <option value="{{ alltool[0] }}" selected>{{alltool[0]}}</option>
+                        {% else %}
+                            <option value="{{ alltool[0] }}">{{alltool[0]}}</option>
+                        {% endif %}
+                    {% endfor %}</select>
+                {% endfor %}</td>
+            <td><b>Categories:</b><br>
+                {% for category in categories %}
+                    <select name="{{category[0]}}" id="{{category[0]}}">
+                    {% for allcategory in allcategories %}
+                        {% if allcategory[0] == category[0] %}
+                            <option value="{{ allcategory[0] }}" selected>{{allcategory[0]}}</option>
+                        {% else %}
+                            <option value="{{ allcategory[0] }}">{{allcategory[0]}}</option>
+                        {% endif %}
+                    {% endfor %}</select>
+                {% endfor %}</td>
+            </tr> </table>
+                <p>
+            <input type="hidden" name="step" value="update_database">
+            <input type="hidden" name="dishid" value="{{ recipe.dishid }}">
+        <center><input type="submit"></center>
+        </div></form>
+    {% elif step == "update_database" %}
+        Thanks for making your changes!
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+            </center>
+</body>
+</html>

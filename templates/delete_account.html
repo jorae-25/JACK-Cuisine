@@ -1,0 +1,41 @@
+<html>
+    <head>
+<style>
+div {
+  width: 200px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Delete Account</title>
+    </head>
+<body>
+    <center><h1>Delete Account</h1>
+    {% if step == "display_users" %}
+        {% if users|length > 0 %}
+            Select your account:<p>
+            <form action="{{ url_for('delete_account') }}" method="post">
+            <select name="userid" id="userid">
+                {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="delete_user">
+            <input type="submit">
+            </form>
+        {% else %}
+            There are no users.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+        
+    {% elif step == "delete_user" %}
+        Account has been deleted.
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>JACK Cuisine</title>
+        <link rel="stylesheet" href="static/home_style.css">
+    </head>
+<body>
+    <h1>Jack Cuisine</h1>
+    <div class="horz-nav-bar">
+        <div class="browse-recipes">
+            <p>Recipes</p>
+            <div class="dropdown-content">
+                <a href="{{ url_for('browse_recipes') }}">Browse Recipes</a> <br>
+                <a href="{{ url_for('browse_categories') }}">Browse Categories</a><br>
+                <a href="{{ url_for('edit_recipe') }}">Edit Recipes</a><br>
+                <a href="{{ url_for('delete_recipe') }}">Delete Recipes</a><br>
+            </div>
+        </div>
+
+        <div class="create-user-account">
+            <p>Manage Account</p>
+            <div class="dropdown-content">
+                <a href="{{ url_for('create_account') }}">Create User Account</a><br>
+                <a href="{{ url_for('edit_account') }}">Edit Account Information</a><br>
+                <a href="{{ url_for('delete_account') }}">Delete Account</a>
+            </div>
+        </div>
+
+        <div class="browse-reviews">
+                <p>Reviews</p>
+                <div class="dropdown-content">
+                <a href="{{ url_for('browse_reviews') }}">Browse Reviews</a><br>
+                <a href="{{ url_for('write_review') }}">Write Reviews</a><br>
+                <a href="{{ url_for('edit_review') }}">Edit Reviews</a><br>
+                <a href="{{ url_for('delete_review') }}">Delete Reviews</a><br>
+                <a href="{{ url_for('fav_recipe') }}">Favorite Recipes</a><br>
+                <a href="{{ url_for('unfav_recipe') }}">Unfavorite Recipes</a>
+                </div> 
+        </div>
+        </div>
+        <div class="home-display-recipes">
+        <div class="slow-cooker-chicken-dumplings">
+          <img src="/static/chicken_dumplings.jpg" alt="chicken dumplings" width="300" height="300">
+          <center>Slow Cooker Chicken and Dumplings</center>
+        </div>
+          
+        <div class="brown-sugar-meatloaf">
+          <img src="/static/brown-sugar-meatloaf.jpg" alt="brown sugar meatloaf" width="300" height="300">
+          <center>Brown Sugar Meatloaf</center>
+        </div>
+
+        <div class="best-chocolate-chip">
+          <img src="/static/choco-chip.jpg" alt="choco chips" width="300" height="300">
+          <center>Best Chocolate Chip Cookies</center>
+        </div>
+
+        <div class="grilled-salmon-1">
+            <img src="/static/grilled_salmon.jpg" alt="grilled salmon" width="300" height="300">
+            <center>Best Chocolate Chip Cookies</center>
+        </div>
+
+        <div class="quick-and-easy-alfredo-sauce">
+            <img src="/static/alfredo.jpg" alt="alredo sauce" width="300" height="300">
+            <center>Quick and Easy Alfredo Sauce</center>
+        </div>
+        <div class="amazing-pork-tenderloin-in-slow-cooker">
+            <img src="/static/pork-tenderloin.jpg" alt="pork tenderloin" width="300" height="300">
+            <center>Amazing Pork Tenderloin</center>
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>

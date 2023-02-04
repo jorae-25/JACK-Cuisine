@@ -1,0 +1,76 @@
+<html>
+    <head>
+<style>
+div {
+  width: 400px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <center><title>Edit a Review</title>
+    </head>
+<body>
+    <center><h1>Edit a Review</h1>
+    {% if step == "display_users" %}
+        {% if users|length > 0 %}
+            Select your Account:<p>
+            <form action="{{ url_for('edit_review') }}" method="post">
+            <select name="userid" id="userid">
+                {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="display_reviews">
+            <center><input type="submit"></div></center>
+            </form>
+        {% else %}
+            There are no users.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    {% elif step == "display_reviews" %}
+        {% if reviews|length > 0 %}
+        Select the review you'd like to edit:<p>
+            <form action="{{ url_for('edit_review') }}" method="post">
+            <select name="dishid" id="dishid">
+                {% for review in reviews %}
+                    <option value="{{ review.dishid }}">{{ review.title }}</option>
+                {% endfor %}
+            </select><p>
+            <input type="hidden" name="step" value="make_edits">
+            <input type="hidden" name="userid" value="{{ userid }}">
+            <center><input type="submit"></div></center>
+            </form> 
+        {% else %}
+            This user has not written any reviews.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    {% elif step == "make_edits" %}
+        <h3>Edit your review:</h3>
+        <form action="{{ url_for('edit_review') }}" method="post"><div>
+        <b>Star Rating: </b><br>
+        <select name="numstars" id="numstars">
+            <option value=1>1 &#11088</option>
+            <option value=2>2 &#11088</option>
+            <option value=3>3 &#11088</option>
+            <option value=4>4 &#11088</option>
+            <option value=5>5 &#11088</option>
+        </select> 
+        <p>
+        <b>Review:</b><br> <textarea name="reviewtext" rows="10" cols="55">{{ review.reviewtext }}</textarea><p>
+        <input type="hidden" name="userid" value="{{ userid }}">
+        <input type="hidden" name="dishid" value="{{ dishid }}">
+        <input type="hidden" name="step" value="update_database">
+        <center><input type="submit"></center></div>
+        </form>
+    {% elif step == "update_database" %}
+        Thanks for making your changes!
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+    </body>
+</html>

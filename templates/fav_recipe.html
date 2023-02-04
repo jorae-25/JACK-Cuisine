@@ -1,0 +1,44 @@
+<html>
+    <head>
+<style>
+div {
+  width: 300px;
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Favorite Recipes</title>
+    </head>
+<body>
+    <center><h1>Favorite Recipes</h1>
+    {% if step == "display_users_recipes" %}
+    <form action="{{ url_for('fav_recipe') }}" method="post">
+        <center><div>
+        Select your account: <br>
+        <select name="userid" id="userid">
+        {% for user in users %}
+                    <option value="{{ user.userid }}">{{ user.firstname }} {{ 
+user.lastname }}</option>
+        {% endfor %}
+        </select>
+            <p>
+        Select the dish you want to review: <br>
+        <select name="dishid" id="dishid">
+        {% for recipe in recipes %}
+                    <option value="{{ recipe.dishid }}">{{ recipe.title }}</option>
+        {% endfor %}
+        </select>
+        <p>
+            <input type="hidden" name="step" value="update_database">
+    <center><input type="submit"></center> 
+        </div></center>
+        </form>
+    {% elif step == "update_database" %}
+        You succesfully favorited this recipe.
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+</body>
+</html>

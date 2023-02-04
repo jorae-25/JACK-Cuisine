@@ -1,0 +1,52 @@
+<html>
+    <head>
+<style>
+.button {
+  border: true;
+  color: black;
+  width: 200px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #FFFFFF;} /* White */
+div {
+  width: 500px;
+  padding: 10px;
+  border: 2px solid gray;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Delete a Recipe</title>
+    </head>
+<body>
+    <center><h1>Delete a Recipe</h1>
+    {% if step == "display_recipes" %}
+        {% if recipes|length > 0 %}
+            <h4>Click on a recipe to delete it.</h4>
+            <form action="{{ url_for('delete_recipe') }}" method="post">
+            {% for recipe in recipes %}
+                    <button type="submit" value="{{ recipe.dishid }}" name="dishid" class="button button1">{{ recipe.title }}</button>
+            {% endfor %}
+            <input type="hidden" name="step" value="delete_recipe">
+            </form>
+        {% else %}
+            There are no recipes.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+        
+    {% elif step == "delete_recipe" %}
+        Recipe has been deleted.
+        <p>
+        <a href="{{ url_for('homepage') }}">Back to homepage</a>
+    {% endif %}
+    </center>
+    </body>
+</html>

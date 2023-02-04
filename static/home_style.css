@@ -1,0 +1,100 @@
+body{
+    background-color: white;
+}
+p{
+  font-size: 1.5em; 
+}
+
+.horz-nav-bar{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr; 
+  width: 100%;
+  justify-items: center;
+  align-items: start; 
+  background: white;
+}
+
+h1{
+  text-align: center;
+  background: white;
+  
+}
+
+.browse-recipes{
+  align-self: start;
+  display: inline-block; 
+  cursor: pointer;
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.browse-recipes:hover .dropdown-content{
+  display:block;
+}
+
+.create-user-account{
+  align-self: start;
+  display: inline-block;
+  cursor: pointer;
+}
+.create-user-account:hover .dropdown-content{
+  display:block; 
+}
+
+.browse-reviews{
+  align-self: start; 
+  display: inline-block;
+  cursor: pointer;
+}
+
+.browse-reviews:hover .dropdown-content{
+  display: block; 
+}
+
+a{
+  text-decoration: none;
+}
+a:hover, a:active {
+  background-color: gray;
+}
+
+.home-display-recipes{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1em;
+  row-gap: 1em; 
+  grid-column: 2/3; 
+  padding: 1em;
+  justify-self: center; 
+  align-self: start; 
+  justify-items: center; 
+}
+.slow-cooker-chicken-dumplings{
+  box-shadow: 20px 20px 50px #bce8eb;
+}
+.brown-sugar-meatloaf{
+ box-shadow: 20px 20px 50px #bce8eb;
+  
+}
+.best-chocolate-chip{
+  box-shadow: 20px 20px 50px #bce8eb;*
+}
+.grilled-salmon-1{
+  box-shadow: 20px 20px 50px #bce8eb;
+}
+.quick-and-easy-alfredo-sauce{
+  box-shadow: 20px 20px 50px #bce8eb;
+}
+.amazing-pork-tenderloin-in-slow-cooker{
+  
+  box-shadow: 20px 20px 50px #bce8eb;
+}
+

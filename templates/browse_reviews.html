@@ -1,0 +1,63 @@
+<html>
+    <head>
+<style>
+.button {
+  border: true;
+  color: black;
+  width: 200px;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #FFFFFF;} /* White */
+div {
+  width: 500px;
+  padding: 10px;
+  border: 2px solid gray;
+  text-align: left;
+  margin: 0;
+}
+</style>
+        <title>Browse Reviews</title>
+    </head>
+<body>
+    <center><h1>Browse Reviews</h1>
+    {% if step == "display_recipes" %}
+        {% if recipes|length > 0 %}
+            <h4>Click on a recipe to see its reviews.</h4>
+            <form action="{{ url_for('browse_reviews') }}" method="post">
+            {% for recipe in recipes %}
+                    <button type="submit" value="{{ recipe.dishid }}" name="dishid" class="button button1">{{ recipe.title }}</button>
+            {% endfor %}
+            <input type="hidden" name="step" value="display_reviews">
+            </form>
+        {% else %}
+            There are no reviews.
+            <p>
+            <a href="{{ url_for('homepage') }}">Back to homepage</a>
+        {% endif %}
+    
+    {% elif step == "display_reviews" %}
+        {% if reviews|length > 0 %}
+            <h2>{{ reviews[0].title }}</h2>
+            <h3>Average rating: {{ avgstars[0] }} &#11088</h3>
+            {% for review in reviews %}
+                        <div><b>Written by: </b>{{ review.firstname }} {{ review.lastname }} <br>
+                        {{ review.numstars }} stars &#11088 <br>
+                        {{ review.reviewtext }} <br>
+                        &#128077 {{ review.numupvote }}</div> <br>
+        {% endfor %}
+        {% else %}
+            There are no reviews for this recipe.
+            <p>
+            <a href="{{ url_for('browse_reviews') }}">Back to list of recipes</a>
+        {% endif %}
+    {% endif %}
+                </center>
+    </body>
+</html>
